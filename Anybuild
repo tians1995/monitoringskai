@@ -23,7 +23,7 @@ laravel_serve(
     config,
     build,
     name = "audit-finding-monitoring",
-    prepare = ["php artisan storage:link"],
+    build_post = [run("php artisan storage:link", group = "build")],
     extra_env = {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
