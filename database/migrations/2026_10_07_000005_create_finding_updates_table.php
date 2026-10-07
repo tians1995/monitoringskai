@@ -1,0 +1,3 @@
+<?php
+use Illuminate\Database\Migrations\Migration; use Illuminate\Database\Schema\Blueprint; use Illuminate\Support\Facades\Schema;
+return new class extends Migration { public function up(){Schema::create('finding_updates',function(Blueprint $t){$t->id();$t->foreignId('finding_id')->constrained('audit_findings')->cascadeOnDelete();$t->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();$t->string('status');$t->unsignedTinyInteger('progress')->default(0);$t->text('notes')->nullable();$t->date('old_target_date')->nullable();$t->date('new_target_date')->nullable();$t->timestamps();});} public function down(){Schema::dropIfExists('finding_updates');} };
