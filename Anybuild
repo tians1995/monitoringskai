@@ -29,5 +29,4 @@ laravel_serve(
         "APP_DEBUG": "false",
         "SESSION_DRIVER": "cookie",
     },
-    volumes = [volume("audit-evidence", "/app/storage/app/public")],
 )
