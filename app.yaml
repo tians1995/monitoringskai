@@ -1,0 +1,49 @@
+kind: wasmer.io/App.v0
+owner: christiandkp
+name: audit-finding-monitoring
+package: .
+
+annotations:
+  anybuild.run/config:
+    commands:
+      after_deploy: php artisan migrate --seed --force
+      build: npm run build
+    composer_build_script: post-autoload-dump
+    composer_enable: true
+    name: out
+    node_build_command: npm run build
+    node_install_inputs:
+      - package.json
+    node_package_manager: npm
+    npm_version: '11'
+    php_framework: laravel
+    php_public_dir: public
+    phpix: true
+    php_version: '8.3.29'
+  anybuild.run/provider: laravel
+  anybuild.run/version: 0.33.0
+  wasmer.io/version: 7.5.0
+
+enable_email: true
+env:
+  APP_ENV: production
+  APP_DEBUG: 'false'
+  DB_CONNECTION: mysql
+  PHPIX_PHP_THREADS: '4'
+  SEED_DEMO_USERS: 'true'
+  SESSION_DRIVER: cookie
+
+capabilities:
+  database:
+    engine: mysql
+
+volumes:
+  - name: audit-finding-monitoring-storage
+    mount: /app/storage/app/public
+
+jobs:
+  - name: migrate-and-seed
+    trigger: post-deployment
+    action:
+      execute:
+        command: after_deploy
