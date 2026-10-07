@@ -25,7 +25,7 @@ Upload the project contents. Point the domain/subdomain document root to `/publi
 The application calculates due/overdue status at request time, so the core reminder logic does not require a cron job.
 
 ## Wasmer.io with Anybuild
-The root `Anybuild` file configures the Laravel/PHP and Vite build and runs migrations plus the idempotent seeder after deploy. It prepares Laravel's public storage link. For persistent uploaded evidence, attach a Wasmer volume at `/app/storage/app/public`. Set these values as Wasmer secrets/environment variables before deploying:
+The root `Anybuild` file configures the Laravel/PHP and Vite build and runs migrations plus the idempotent seeder after deploy. It creates a relative public storage link compatible with Wasmer's package validation. For persistent uploaded evidence, attach a Wasmer volume at `/app/storage/app/public`. Set these values as Wasmer secrets/environment variables before deploying:
 
 - `APP_KEY` — generate with `php artisan key:generate --show` in a trusted local environment.
 - `APP_URL` — the public Wasmer app URL.
