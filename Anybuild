@@ -1,0 +1,33 @@
+load("//anybuild/tools:laravel.bzl", "laravel_build", "laravel_config", "laravel_serve")
+
+config = laravel_config(
+    schema = 1,
+    commands = {
+        "after_deploy": "php artisan migrate --seed --force",
+    },
+    composer_build_script = "post-update-cmd",
+    composer_enable = True,
+    node_build_command = "npm run build",
+    node_install_inputs = ["package.json", "package-lock.json"],
+    node_package_manager = "npm",
+    npm_version = "11",
+    php_framework = "laravel",
+    php_public_dir = "public",
+    phpix = True,
+    php_version = "8.3.29",
+)
+
+build = laravel_build(config)
+
+laravel_serve(
+    config,
+    build,
+    name = "audit-finding-monitoring",
+    prepare = ["php artisan storage:link"],
+    extra_env = {
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "SESSION_DRIVER": "cookie",
+    },
+    volumes = [volume("audit-evidence", "/app/storage/app/public")],
+)
