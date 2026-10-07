@@ -5,10 +5,10 @@ config = laravel_config(
     commands = {
         "after_deploy": "php artisan migrate --seed --force",
     },
-    composer_build_script = "post-update-cmd",
+    composer_build_script = "post-autoload-dump",
     composer_enable = True,
     node_build_command = "npm run build",
-    node_install_inputs = ["package.json", "package-lock.json"],
+    node_install_inputs = ["package.json"],
     node_package_manager = "npm",
     npm_version = "11",
     php_framework = "laravel",
