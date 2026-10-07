@@ -1,13 +1,13 @@
 kind: wasmer.io/App.v0
 owner: christiandkp
-name: audit-finding-monitoring
-package: .
+name: monitoringskaiv1
+app_id: da_K53IxtPUOrmo
+package: sha256:26d2a09745b7b6deefedf2680ecacae850d4ca190e8258e7870b74f2b2e9bba9
 
 annotations:
   anybuild.run/config:
     commands:
       after_deploy: php artisan migrate --seed --force
-      build: npm run build
     composer_build_script: post-autoload-dump
     composer_enable: true
     name: out
@@ -24,6 +24,7 @@ annotations:
   anybuild.run/version: 0.33.0
   wasmer.io/version: 7.5.0
 
+enableDatabase: true
 enable_email: true
 env:
   APP_ENV: production
@@ -32,10 +33,6 @@ env:
   PHPIX_PHP_THREADS: '4'
   SEED_DEMO_USERS: 'true'
   SESSION_DRIVER: cookie
-
-capabilities:
-  database:
-    engine: mysql
 
 volumes:
   - name: audit-finding-monitoring-storage
