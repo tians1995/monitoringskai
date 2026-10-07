@@ -52,3 +52,38 @@ label{font-size:.82rem;font-weight:650;color:#40506a;display:block}
 @media(max-width:900px){.admin-sider{width:78px!important;max-width:78px!important;min-width:78px!important}.admin-sider .brand-lockup{padding:0 21px}.admin-sider .menu-caption,.admin-sider .sider-note{display:none}.admin-sider .admin-menu{padding:0 10px}.admin-sider .admin-menu .ant-menu-item{padding-inline:0!important;text-align:center}.admin-sider .admin-menu .ant-menu-title-content{display:none}.admin-main{margin-left:78px}.admin-header{padding:0 22px}.admin-content{padding:25px 22px}.admin-footer{padding:14px 22px}}
 @media(max-width:760px){.audit-summary-row{grid-template-columns:minmax(110px,1fr) auto;gap:8px}.audit-summary-counts{gap:8px}.audit-summary-progress{grid-column:1/-1;padding-left:1px}.audit-summary-progress .ant-progress{max-width:180px}}
 @media(max-width:640px){.admin-header{height:62px!important;min-height:62px;padding:0 14px}.admin-header .ant-breadcrumb{display:none}.account-button{width:46px;justify-content:center;padding:4px}.account-copy,.account-chevron{display:none}.admin-content{padding:21px 14px}.page-heading h3.ant-typography{font-size:20px}.admin-content .card{padding:14px;overflow-x:auto}.admin-content table{min-width:700px}.login-page{grid-template-columns:1fr}.login-showcase{display:none}.login-panel{min-height:100vh;padding:26px}.admin-footer{padding:12px 14px}}
+
+/* Keep the content column fluid and expose navigation as a drawer on phones. */
+.admin-main{min-width:0}
+.admin-content{box-sizing:border-box}
+@media(max-width:640px){
+  .admin-sider{width:252px!important;max-width:252px!important;min-width:252px!important;transform:translateX(-100%);transition:transform .22s ease;box-shadow:none}
+  .admin-sider.mobile-open{transform:translateX(0);box-shadow:8px 0 30px rgba(18,33,61,.2)}
+  .admin-sider .brand-lockup{padding:0 24px}
+  .admin-sider .brand-name,.admin-sider .menu-caption,.admin-sider .sider-note,.admin-sider .admin-menu .ant-menu-title-content{display:initial}
+  .admin-sider .menu-caption{display:block}
+  .admin-sider .admin-menu{padding:0 12px}
+  .admin-sider .admin-menu .ant-menu-item{padding-inline:12px!important;text-align:left}
+  .admin-sider .ant-layout-sider-children{overflow-y:auto}
+  .mobile-nav-backdrop{position:fixed;inset:0;z-index:9;border:0;background:rgba(12,22,40,.42)}
+  .admin-main,.admin-main.collapsed{margin-left:0}
+  .admin-content{width:100%;padding:20px 14px}
+  .page-heading{align-items:flex-start;margin-bottom:18px}
+  .page-heading .ant-typography-secondary{line-height:1.5}
+  .admin-content .flex.justify-between.mb-4{align-items:stretch;flex-direction:column;gap:12px}
+  .admin-content .flex.justify-between.mb-4 form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+  .admin-content .flex.justify-between.mb-4 form input{grid-column:1/-1}
+  .admin-content .flex.justify-between.mb-4 form .input{min-width:0}
+  .admin-content .flex.justify-between.mb-4>.btn-primary{align-self:flex-start}
+  .admin-content .card{min-width:0}
+  .admin-content table{min-width:680px}
+  .login-page{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:420px){
+  .admin-content{padding-inline:11px}
+  .admin-header{padding-inline:10px}
+  .dashboard-period{align-items:flex-start;flex-direction:column;gap:6px}
+  .audit-summary-counts{flex-wrap:wrap}
+  .finding-items-heading,.finding-title-block{align-items:flex-start;flex-direction:column}
+  .login-panel{padding:20px}
+}

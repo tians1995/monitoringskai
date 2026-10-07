@@ -14,6 +14,7 @@ export default function AppLayout({ children, title = 'Audit Finding Monitoring'
   const currentUrl = url || window.location.pathname;
   const user = auth?.user;
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isAdmin = user?.role === 'ADMIN';
 
   const menuItems = useMemo(() => [
@@ -30,19 +31,23 @@ export default function AppLayout({ children, title = 'Audit Finding Monitoring'
   ] };
 
   return <Layout className="admin-layout">
-    <Sider className="admin-sider" width={252} collapsedWidth={78} collapsible collapsed={collapsed} trigger={null}>
+    {mobileMenuOpen && <button className="mobile-nav-backdrop" aria-label="Tutup menu" onClick={() => setMobileMenuOpen(false)} />}
+    <Sider className={`admin-sider${mobileMenuOpen ? ' mobile-open' : ''}`} width={252} collapsedWidth={78} collapsible collapsed={collapsed} trigger={null}>
       <Link href="/dashboard" className="brand-lockup">
         <span className="brand-mark"><SafetyCertificateOutlined /></span>
         {!collapsed && <span className="brand-name">Audit<span>Monitor</span></span>}
       </Link>
       {!collapsed && <div className="menu-caption">MENU UTAMA</div>}
-      <Menu theme="dark" mode="inline" selectedKeys={[selected]} items={menuItems} className="admin-menu" />
+      <Menu theme="dark" mode="inline" selectedKeys={[selected]} items={menuItems} className="admin-menu" onClick={() => setMobileMenuOpen(false)} />
       {!collapsed && <div className="sider-note"><span className="sider-note-icon"><SafetyCertificateOutlined /></span><b>Audit Finding Monitoring</b><small>Monitoring temuan dalam satu tempat.</small></div>}
     </Sider>
     <Layout className={`admin-main${collapsed ? ' collapsed' : ''}`}>
       <Header className="admin-header">
         <Space size={16}>
-          <Button type="text" className="collapse-button" icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} onClick={() => setCollapsed(!collapsed)} />
+          <Button type="text" className="collapse-button" icon={<MenuUnfoldOutlined />} onClick={() => {
+            if (window.matchMedia('(max-width: 640px)').matches) setMobileMenuOpen(!mobileMenuOpen);
+            else setCollapsed(!collapsed);
+          }} />
           <Breadcrumb items={[{ title: 'Monitoring' }, { title }]} />
         </Space>
         <Dropdown menu={userMenu} placement="bottomRight" trigger={['click']}>
